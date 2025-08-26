@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { carouselWords } from '@/lib/carousel-words';
 
 interface WordCarouselProps {
@@ -8,7 +8,14 @@ interface WordCarouselProps {
 }
 
 export function WordCarousel({ className = "" }: WordCarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // Use a deterministic "random" starting point based on current time
+  const initialIndex = useMemo(() => {
+    const now = new Date();
+    const seed = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+    return seed % carouselWords.length;
+  }, []);
+
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
   useEffect(() => {
     const interval = setInterval(() => {
