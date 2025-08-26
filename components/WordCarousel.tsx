@@ -12,8 +12,8 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselWords.length);
-    }, 3000); // Slower for smoother effect
+      setCurrentIndex((prevIndex) => (prevIndex - 1 + carouselWords.length) % carouselWords.length);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -23,7 +23,7 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
     word.length > longest.length ? word : longest, ""
   );
 
-  // Get the 7 words to display (3 before, current, 3 after) for smoother transitions
+  // Get the 7 words to display (3 before, current, 3 after)
   const getDisplayWords = () => {
     const words = [];
     for (let i = -3; i <= 3; i++) {
@@ -43,13 +43,13 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
     <span 
       className={`relative inline-block ${className}`} 
       style={{ 
-        width: `${longestWord.length * 0.6}em`, // Dynamic width based on longest word
-        height: '1.2em', // Back to normal text height
-        verticalAlign: 'baseline' // Ensure baseline alignment
+        width: `${longestWord.length * 0.6}em`,
+        height: '1.2em',
+        verticalAlign: 'baseline'
       }}
     >
       {displayWords.map(({ word, position, key }) => {
-        // Calculate styles based on position - all words move upward
+        // Calculate opacity, position, and scale based on distance from center
         let opacity = 0;
         let translateY = 0;
         let scale = 1;
@@ -58,23 +58,23 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
         switch (position) {
           case -3:
             opacity = 0.05;
-            translateY = 90; // Further below
+            translateY = -90;
             scale = 0.85;
             zIndex = 1;
             break;
           case -2:
             opacity = 0.1;
-            translateY = 60; // Below
+            translateY = -60;
             scale = 0.9;
             zIndex = 2;
             break;
           case -1:
             opacity = 0.25;
-            translateY = 30; // Slightly below
+            translateY = -30;
             scale = 0.95;
             zIndex = 3;
             break;
-          case 0: // Center word - exactly on baseline
+          case 0: // Center word - baseline
             opacity = 1;
             translateY = 0;
             scale = 1;
@@ -82,19 +82,19 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
             break;
           case 1:
             opacity = 0.25;
-            translateY = -30; // Slightly above
+            translateY = 30;
             scale = 0.95;
             zIndex = 3;
             break;
           case 2:
             opacity = 0.1;
-            translateY = -60; // Above
+            translateY = 60;
             scale = 0.9;
             zIndex = 2;
             break;
           case 3:
             opacity = 0.05;
-            translateY = -90; // Further above
+            translateY = 90;
             scale = 0.85;
             zIndex = 1;
             break;
@@ -116,10 +116,9 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
           </span>
         );
       })}
+      
       {/* Invisible baseline word to maintain proper spacing */}
-      <span className="invisible">
-        {longestWord}
-      </span>
+      <span className="invisible">{longestWord}</span>
     </span>
   );
 }

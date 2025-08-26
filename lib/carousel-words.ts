@@ -1,32 +1,4 @@
-export const carouselWords = [
-  "advocated",
-  "advised",
-  "analyzed",
-  "assessed",
-  "built",
-  "collected",
-  "conducted",
-  "coordinated",
-  "delivered",
-  "designed",
-  "developed",
-  "disseminated",
-  "drafted",
-  "empowered",
-  "engaged",
-  "established",
-  "evaluated",
-  "facilitated",
-  "implemented",
-  "mobilized",
-  "monitored",
-  "procured",
-  "promoted",
-  "provided",
-  "published",
-  "reported",
-  "strengthened",
-  "supplied",
-  "supported",
-  "trained"
-];
+import actionWords from './action_words.json';
+
+// Automatically sort words alphabetically
+export const carouselWords = [...actionWords].sort();
