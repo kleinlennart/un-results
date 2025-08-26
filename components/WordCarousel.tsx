@@ -116,7 +116,7 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
               transform: `translateY(${translateY}px) scale(${scale})`,
               color: position === 0 ? 'inherit' : '#9CA3AF',
               zIndex,
-              transformOrigin: 'left baseline',
+              transformOrigin: 'left center',
             }}
           >
             {word}
