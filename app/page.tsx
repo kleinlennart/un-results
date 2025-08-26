@@ -1,29 +1,11 @@
 
 export default function Home() {
     return (
-        <main className="min-h-screen bg-background flex justify-center px-4 sm:px-6">
-            <div className="max-w-2xl lg:max-w-3xl py-8">
-                {/* Logo */}
-                <img
-                    src="/images/UN Logo_Horizontal_English/Colour/UN Logo_Horizontal_Colour_English.svg"
-                    alt="UN Logo"
-                    className="h-10 sm:h-12 w-auto select-none mb-12"
-                    draggable="false"
-                />
-
-                {/* Header */}
-                <header className="mb-5">
-                    <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground">
-                        UN Website Boilerplate
-                    </h1>
-                </header>
-
-                {/* Content */}
-                <section>
-                    <p className="text-muted-foreground leading-relaxed">
-                        A modern, responsive foundation for United Nations web applications.
-                    </p>
-                </section>
+        <main className="min-h-screen bg-background flex items-center justify-center px-4" style={{ alignItems: 'flex-start', paddingTop: '40vh' }}>
+            <div className="text-center w-full px-2">
+                <p className="text-foreground text-xs sm:text-sm md:text-base lg:text-lg xl:text-2xl 2xl:text-4xl tracking-wide sm:tracking-wider leading-relaxed sm:whitespace-nowrap" style={{ fontFamily: 'Roboto Mono, monospace' }}>
+                    <strong>[UN ENTITY]</strong> <span className="mx-0.5 sm:mx-1 md:mx-2 lg:mx-3 xl:mx-4">+</span> conducted <span className="mx-0.5 sm:mx-1 md:mx-2 lg:mx-3 xl:mx-4">+</span> XX <span className="mx-0.5 sm:mx-1 md:mx-2 lg:mx-3 xl:mx-4">+</span> <strong>[Output]</strong> <span className="mx-0.5 sm:mx-1 md:mx-2 lg:mx-3 xl:mx-4">+</span> leading to <span className="mx-0.5 sm:mx-1 md:mx-2 lg:mx-3 xl:mx-4">+</span> XXX people <span className="mx-0.5 sm:mx-1 md:mx-2 lg:mx-3 xl:mx-4">+</span> <strong>[Outcome]</strong>
+                </p>
             </div>
         </main>
     );
