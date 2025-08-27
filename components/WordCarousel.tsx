@@ -21,7 +21,7 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex - 1 + carouselWords.length) % carouselWords.length);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselWords.length);
     }, 3000);
 
     return () => clearInterval(interval);
