@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { carouselWords } from '@/lib/carousel-words';
 
 interface WordCarouselProps {
@@ -8,14 +8,16 @@ interface WordCarouselProps {
 }
 
 export function WordCarousel({ className = "" }: WordCarouselProps) {
-  // Use a deterministic "random" starting point based on current time
-  const initialIndex = useMemo(() => {
+  // Start with a fixed index to avoid hydration mismatch
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Set the actual starting position only on the client after hydration
+  useEffect(() => {
     const now = new Date();
     const seed = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-    return seed % carouselWords.length;
+    const initialIndex = seed % carouselWords.length;
+    setCurrentIndex(initialIndex);
   }, []);
-
-  const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
   useEffect(() => {
     const interval = setInterval(() => {
