@@ -5,15 +5,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev        # dev server with Turbopack, http://localhost:3000
-npm run build      # static export to out/, also type-checks
-npm run lint       # ESLint
-npx tsc --noEmit   # type-check only
+pnpm dev           # dev server with Turbopack, http://localhost:3000
+pnpm build         # static export to out/, also type-checks
+pnpm lint          # ESLint
+pnpm tsc --noEmit  # type-check only
 ```
+
+- pnpm is the package manager, pinned through `packageManager` in `package.json`. Don't use npm or add a `package-lock.json`.
 
 - There is no test framework and there are no tests.
 - `next build` can rewrite `tsconfig.json` (`jsx`, `include`, formatting), so check for that before committing.
-- `typescript` stays on 6.x because `typescript-eslint` doesn't support TS 7 yet. The `minimatch` override in `package.json` keeps `npm audit` clean, since the ESLint plugins still request vulnerable versions.
+- `typescript` stays on 6.x because `typescript-eslint` doesn't support TS 7 yet. The `minimatch` override in `pnpm-workspace.yaml` keeps `pnpm audit` clean, since the ESLint plugins still request vulnerable versions.
 
 ## Deployment
 
@@ -37,7 +39,7 @@ The `##` and `###` placeholders are wrapped in the local `Annotation` component,
 - Tailwind v4 is configured in CSS, in `app/globals.css`. There is no `tailwind.config` file. Consult https://tailwindcss.com/docs/ rather than relying on older Tailwind knowledge.
 - Use the theme colors from `globals.css`: the UN palette in `@theme` (`un-blue`, `un-red`, `un-gray`, etc.) and the shadcn semantic tokens (`background`, `muted-foreground`, etc.).
 - **Fonts:** the `@theme inline` block overrides the Roboto `--font-sans` with `--font-geist-sans`, and sets `--font-mono` to `--font-geist-mono`, but nothing loads or defines those Geist variables. The compiled default font family therefore points at an undefined variable, and `page.tsx` sets Roboto and Roboto Mono through inline `fontFamily` styles to compensate. Text outside those inline styles doesn't get Roboto. The Geist mention in `README.md` is create-next-app boilerplate.
-- **shadcn/ui:** `components.json` is configured (new-york, neutral, lucide), but `components/ui` doesn't exist yet. Prefer shadcn components and install them with `npx shadcn@latest add <component>`.
+- **shadcn/ui:** `components.json` is configured (new-york, neutral, lucide), but `components/ui` doesn't exist yet. Prefer shadcn components and install them with `pnpm dlx shadcn@latest add <component>`.
 - UN logos are in `public/images` in horizontal and stacked layouts, in black, colour and white, as SVG, PNG and EPS.
 
 ## Conventions
