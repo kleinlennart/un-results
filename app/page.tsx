@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Footer } from '@/components/Footer';
 import { WordCarousel } from '@/components/WordCarousel';
-import { footerLinkStyle, thesis } from '@/lib/site';
+import { footerLinkStyle, hiddenLinkStyle, thesis } from '@/lib/site';
 
 // Reusable annotation component
 function Annotation({ children, label }: { children: React.ReactNode, label: string }) {
@@ -24,9 +24,9 @@ export default function Home() {
     <>
       <main className="flex-1 flex items-center justify-center px-4">
         <p className="text-foreground text-base lg:text-lg xl:text-2xl 2xl:text-4xl tracking-wide sm:tracking-wider leading-relaxed lg:whitespace-nowrap">
-          <span className={clause}><strong>[UN ENTITY]</strong></span>{' '}
-          <span className={clause}><WordCarousel /> <Annotation label="Output Indicator">##</Annotation> <strong>[OUTPUT]</strong></span>{' '}
-          <span className={clause}>resulting in <Annotation label="Outcome Indicator"><span className="inline-block w-[8ch] border-b-2 border-current animate-blink motion-reduce:animate-none"><span className="sr-only">blank</span>&nbsp;</span></Annotation></span>
+          <span className={clause}><a className={hiddenLinkStyle} href="https://systemchart.un.org"><strong>[UN ENTITY]</strong></a></span>{' '}
+          <span className={clause}><WordCarousel /> <Annotation label="Output Indicator">##</Annotation> <a className={hiddenLinkStyle} href="https://results.un.org"><strong>[OUTPUT]</strong></a></span>{' '}
+          <span className={clause}>resulting in <Annotation label="Outcome Indicator">##</Annotation> <span className="sr-only">blank</span><span aria-hidden="true" className="inline-block w-[8ch] h-0.5 bg-current animate-blink motion-reduce:animate-none"></span></span>
         </p>
       </main>
       <Footer>

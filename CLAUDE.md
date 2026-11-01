@@ -27,13 +27,14 @@ This is a Next.js App Router app with three static routes (`/`, `/about`, `/reso
 
 `app/page.tsx` renders one fixed sentence template:
 
-> **[UN ENTITY]** _verb_ ## **[OUTPUT]** resulting in \_\_\_
+> **[UN ENTITY]** _verb_ ## **[OUTPUT]** resulting in ## \_\_\_
 
-The blinking blank is deliberate: it's an invitation to name the outcome, so don't fill it in. The `##` and the blank are wrapped in the local `Annotation` component, which labels them as output and outcome indicators. The verb slot is `components/WordCarousel.tsx`, the only client component. The thesis line lives in `lib/site.ts`, `app/about/page.tsx` is linked discreetly from the footer, and it links to `app/resources/page.tsx`, a list of official sources kept as data in that file. Only add sources whose content you've checked.
+The blinking line on the baseline is deliberate: it's an invitation to name the outcome, so don't fill it in. Both `##` are wrapped in the local `Annotation` component, which labels them as output and outcome indicators. The verb slot is `components/WordCarousel.tsx`, the only client component. The thesis line lives in `lib/site.ts`, `app/about/page.tsx` is linked discreetly from the footer, and it links to `app/resources/page.tsx`, a list of official sources kept as data in that file. Only add sources whose content you've checked.
 
 - **RBM terms:** copy must follow the UNDG RBM Handbook (2011), linked from the about page. RBM is a management strategy that uses evidence on results for decisions, so don't describe it as measurement. Outputs, outcomes and impact are all results, while activities are not. The carousel verbs are what the handbook calls "action language"; the blank asks for "change language".
 - **Verbs:** add or remove them in `lib/action_words.json`. `lib/carousel-words.ts` sorts them alphabetically, so the order in the JSON file has no effect.
-- **Hydration:** `WordCarousel` must render index 0 on the server and pick its time-based starting word in `useEffect`. Never read `Date` or `Math.random` during render, because this has already caused a hydration error once.
+- **Carousel motion:** words appear in random order. Each one rises from below and fades in, then drifts up and fades away, so faded words only ever show above the current one. Plain CSS transitions on `transform` and `opacity` are enough, so don't add an animation library.
+- **Hydration:** `WordCarousel` must render a fixed order on the server, with no word visible, and shuffle in a timer started from `useEffect`. Never read `Date` or `Math.random` during render, because this has already caused a hydration error once.
 
 ## Styling
 
