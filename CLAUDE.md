@@ -8,6 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 pnpm dev           # dev server with Turbopack, http://localhost:3000
 pnpm build         # static export to out/, also type-checks
 pnpm lint          # ESLint
+pnpm format        # Prettier, also sorts Tailwind classes
 pnpm tsc --noEmit  # type-check only
 ```
 

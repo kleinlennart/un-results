@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import carouselWords from '@/lib/action_words.json';
+import { useState, useEffect } from "react";
+import carouselWords from "@/lib/action_words.json";
 
 interface WordCarouselProps {
   className?: string;
@@ -46,7 +46,7 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
       setStep(0);
     }, START_DELAY);
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return () => clearTimeout(start);
     }
 
@@ -61,8 +61,9 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
   }, []);
 
   // Find the longest word to set container width
-  const longestWord = carouselWords.reduce((longest, word) =>
-    word.length > longest.length ? word : longest, ""
+  const longestWord = carouselWords.reduce(
+    (longest, word) => (word.length > longest.length ? word : longest),
+    "",
   );
 
   // Get the fading words above the current one, plus the one waiting below
@@ -72,7 +73,7 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
       words.push({
         word: order[n % order.length],
         position: n - step,
-        key: n
+        key: n,
       });
     }
     return words;
@@ -85,23 +86,24 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
       className={`relative inline-block ${className}`}
       style={{
         width: `${longestWord.length * 0.6}em`,
-        height: '1.2em',
-        verticalAlign: 'baseline'
+        height: "1.2em",
+        verticalAlign: "baseline",
       }}
     >
       {displayWords.map(({ word, position, key }) => {
-        const { opacity, scale } = position > 0 ? WAITING_STYLE : WORD_STYLES[-position];
+        const { opacity, scale } =
+          position > 0 ? WAITING_STYLE : WORD_STYLES[-position];
 
         return (
           <span
             key={key}
             aria-hidden={position !== 0}
-            className={`absolute left-0 top-0 whitespace-nowrap transition-[transform,opacity] motion-reduce:transition-none ${MOTION}`}
+            className={`absolute top-0 left-0 whitespace-nowrap transition-[transform,opacity] motion-reduce:transition-none ${MOTION}`}
             style={{
               opacity,
               transform: `translateY(${position * 1.25}em) scale(${scale})`,
               zIndex: position === 0 ? 1 : 0,
-              transformOrigin: 'left center',
+              transformOrigin: "left center",
             }}
           >
             {word}

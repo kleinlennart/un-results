@@ -4,33 +4,31 @@ import { thesis } from "@/lib/site";
 import "./globals.css";
 
 const robotoMono = Roboto_Mono({
-    subsets: ["latin"],
-    variable: "--font-roboto-mono",
+  subsets: ["latin"],
+  variable: "--font-roboto-mono",
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://rbm.unfck.org"),
-    title: {
-        default: "resulting in ___",
-        template: "%s · resulting in ___",
-    },
+  metadataBase: new URL("https://rbm.unfck.org"),
+  title: {
+    default: "resulting in ___",
+    template: "%s · resulting in ___",
+  },
+  description: thesis,
+  openGraph: {
+    title: "resulting in ___",
     description: thesis,
-    openGraph: {
-        title: "resulting in ___",
-        description: thesis,
-    },
+  },
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en" className={robotoMono.variable}>
-            <body className="font-mono min-h-screen flex flex-col">
-                {children}
-            </body>
-        </html>
-    );
+  return (
+    <html lang="en" className={robotoMono.variable}>
+      <body className="flex min-h-screen flex-col font-mono">{children}</body>
+    </html>
+  );
 }
