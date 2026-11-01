@@ -1,5 +1,16 @@
 import type { Metadata } from "next";
+import { Roboto, Roboto_Mono } from "next/font/google";
 import "./globals.css";
+
+const roboto = Roboto({
+    subsets: ["latin"],
+    variable: "--font-roboto",
+});
+
+const robotoMono = Roboto_Mono({
+    subsets: ["latin"],
+    variable: "--font-roboto-mono",
+});
 
 export const metadata: Metadata = {
     title: "UN RBM",
@@ -12,7 +23,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" className={`${roboto.variable} ${robotoMono.variable}`}>
             <body>
                 {children}
             </body>

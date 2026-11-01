@@ -38,7 +38,7 @@ The `##` and `###` placeholders are wrapped in the local `Annotation` component,
 
 - Tailwind v4 is configured in CSS, in `app/globals.css`. There is no `tailwind.config` file. Consult https://tailwindcss.com/docs/ rather than relying on older Tailwind knowledge.
 - Use the theme colors from `globals.css`: the UN palette in `@theme` (`un-blue`, `un-red`, `un-gray`, etc.) and the shadcn semantic tokens (`background`, `muted-foreground`, etc.).
-- **Fonts:** the `@theme inline` block overrides the Roboto `--font-sans` with `--font-geist-sans`, and sets `--font-mono` to `--font-geist-mono`, but nothing loads or defines those Geist variables. The compiled default font family therefore points at an undefined variable, and `page.tsx` sets Roboto and Roboto Mono through inline `fontFamily` styles to compensate. Text outside those inline styles doesn't get Roboto. The Geist mention in `README.md` is create-next-app boilerplate.
+- **Fonts:** Roboto and Roboto Mono are the UN standard. `app/layout.tsx` self-hosts them with `next/font/google`, and `globals.css` maps them to `font-sans` (the default) and `font-mono`. Use those classes, not inline `fontFamily` styles. The Geist mention in `README.md` is create-next-app boilerplate.
 - **shadcn/ui:** `components.json` is configured (new-york, neutral, lucide), but `components/ui` doesn't exist yet. Prefer shadcn components and install them with `pnpm dlx shadcn@latest add <component>`.
 - UN logos are in `public/images` in horizontal and stacked layouts, in black, colour and white, as SVG, PNG and EPS.
 
