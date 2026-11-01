@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { carouselWords } from '@/lib/carousel-words';
+import carouselWords from '@/lib/action_words.json';
 
 interface WordCarouselProps {
   className?: string;

@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
-import { Roboto, Roboto_Mono } from "next/font/google";
+import { Roboto_Mono } from "next/font/google";
 import { thesis } from "@/lib/site";
 import "./globals.css";
-
-const roboto = Roboto({
-    subsets: ["latin"],
-    variable: "--font-roboto",
-});
 
 const robotoMono = Roboto_Mono({
     subsets: ["latin"],
@@ -32,7 +27,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={`${roboto.variable} ${robotoMono.variable}`}>
+        <html lang="en" className={robotoMono.variable}>
             <body className="font-mono min-h-screen flex flex-col">
                 {children}
             </body>
