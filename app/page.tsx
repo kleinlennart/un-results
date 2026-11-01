@@ -1,12 +1,14 @@
-
+import Link from 'next/link';
+import { Footer } from '@/components/Footer';
 import { WordCarousel } from '@/components/WordCarousel';
+import { footerLinkStyle, thesis } from '@/lib/site';
 
 // Reusable annotation component
 function Annotation({ children, label }: { children: React.ReactNode, label: string }) {
   return (
     <span className="relative">
       {children}
-      <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 font-sans text-xs text-muted-foreground whitespace-nowrap pointer-events-none">
+      <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-xs text-muted-foreground whitespace-nowrap pointer-events-none">
         {label}
       </span>
       <span className="absolute -top-5 left-1/2 transform -translate-x-1/2 w-px h-4 bg-muted-foreground/50"></span>
@@ -14,16 +16,23 @@ function Annotation({ children, label }: { children: React.ReactNode, label: str
   );
 }
 
+// One line per clause on small screens, a single sentence from lg up
+const clause = "block mt-10 first:mt-0 lg:inline lg:mt-0";
+
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background flex items-center justify-center px-4">
-      <div className="text-center w-full px-2">
-        <div className="relative inline-block">
-          <p className="font-mono text-foreground text-xs sm:text-sm md:text-base lg:text-lg xl:text-2xl 2xl:text-4xl tracking-wide sm:tracking-wider leading-relaxed whitespace-nowrap">
-            <strong>[UN ENTITY]</strong> <WordCarousel /> <Annotation label="Output Indicator">##</Annotation> <strong>[OUTPUT]</strong> resulting in <Annotation label="Outcome Indicator">###</Annotation> <strong>[OUTCOME]</strong>.
-          </p>
-        </div>
-      </div>
-    </main>
+    <>
+      <main className="flex-1 flex items-center justify-center px-4">
+        <p className="text-foreground text-base lg:text-lg xl:text-2xl 2xl:text-4xl tracking-wide sm:tracking-wider leading-relaxed lg:whitespace-nowrap">
+          <span className={clause}><strong>[UN ENTITY]</strong></span>{' '}
+          <span className={clause}><WordCarousel /> <Annotation label="Output Indicator">##</Annotation> <strong>[OUTPUT]</strong></span>{' '}
+          <span className={clause}>resulting in <Annotation label="Outcome Indicator"><span className="inline-block w-[8ch] border-b-2 border-current animate-blink motion-reduce:animate-none"><span className="sr-only">blank</span>&nbsp;</span></Annotation></span>
+        </p>
+      </main>
+      <Footer>
+        <p>{thesis}</p>
+        <Link href="/about" className={footerLinkStyle}>about</Link>
+      </Footer>
+    </>
   );
 }

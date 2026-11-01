@@ -10,6 +10,8 @@ interface WordCarouselProps {
 export function WordCarousel({ className = "" }: WordCarouselProps) {
   // Start with a fixed index to avoid hydration mismatch
   const [currentIndex, setCurrentIndex] = useState(0);
+  // Only animate real ticks, not the jump to the starting word
+  const [animated, setAnimated] = useState(false);
 
   // Set the actual starting position only on the client after hydration
   useEffect(() => {
@@ -22,7 +24,10 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
   }, []);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const interval = setInterval(() => {
+      setAnimated(true);
       setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselWords.length);
     }, 3000);
 
@@ -42,7 +47,7 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
       words.push({
         word: carouselWords[index],
         position: i,
-        key: `${index}-${currentIndex}`
+        key: index
       });
     }
     return words;
@@ -69,19 +74,19 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
         switch (position) {
           case -3:
             opacity = 0.05;
-            translateY = -90;
+            translateY = -3.75;
             scale = 0.85;
             zIndex = 1;
             break;
           case -2:
             opacity = 0.1;
-            translateY = -60;
+            translateY = -2.5;
             scale = 0.9;
             zIndex = 2;
             break;
           case -1:
             opacity = 0.25;
-            translateY = -30;
+            translateY = -1.25;
             scale = 0.95;
             zIndex = 3;
             break;
@@ -93,19 +98,19 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
             break;
           case 1:
             opacity = 0.25;
-            translateY = 30;
+            translateY = 1.25;
             scale = 0.95;
             zIndex = 3;
             break;
           case 2:
             opacity = 0.1;
-            translateY = 60;
+            translateY = 2.5;
             scale = 0.9;
             zIndex = 2;
             break;
           case 3:
             opacity = 0.05;
-            translateY = 90;
+            translateY = 3.75;
             scale = 0.85;
             zIndex = 1;
             break;
@@ -114,10 +119,11 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
         return (
           <span
             key={key}
-            className="absolute left-0 top-0 transition-all duration-1000 ease-out whitespace-nowrap"
+            aria-hidden={position !== 0}
+            className={`absolute left-0 top-0 whitespace-nowrap ${animated ? 'transition-all duration-1000 ease-out' : ''}`}
             style={{
               opacity,
-              transform: `translateY(${translateY}px) scale(${scale})`,
+              transform: `translateY(${translateY}em) scale(${scale})`,
               color: position === 0 ? 'inherit' : '#9CA3AF',
               zIndex,
               transformOrigin: 'left center',

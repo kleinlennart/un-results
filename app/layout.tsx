@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto, Roboto_Mono } from "next/font/google";
+import { thesis } from "@/lib/site";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -13,8 +14,16 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "UN RBM",
-    description: "Results-based management for the UN System, for greater impact.",
+    metadataBase: new URL("https://rbm.unfck.org"),
+    title: {
+        default: "resulting in ___",
+        template: "%s · resulting in ___",
+    },
+    description: thesis,
+    openGraph: {
+        title: "resulting in ___",
+        description: thesis,
+    },
 };
 
 export default function RootLayout({
@@ -24,7 +33,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className={`${roboto.variable} ${robotoMono.variable}`}>
-            <body>
+            <body className="font-mono min-h-screen flex flex-col">
                 {children}
             </body>
         </html>

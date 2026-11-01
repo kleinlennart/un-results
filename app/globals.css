@@ -12,6 +12,14 @@
   --color-un-red: #a0665c;
   --color-faded-jade: #4a7c7e;
   --color-un-gray: #d7d1ca;
+
+  --animate-blink: blink 1.2s step-end infinite;
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
 }
 
 @custom-variant dark (&:is(.dark *));
