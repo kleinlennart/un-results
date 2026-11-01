@@ -16,7 +16,9 @@ export function WordCarousel({ className = "" }: WordCarouselProps) {
     const now = new Date();
     const seed = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
     const initialIndex = seed % carouselWords.length;
-    setCurrentIndex(initialIndex);
+    const frame = requestAnimationFrame(() => setCurrentIndex(initialIndex));
+
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
